@@ -1,0 +1,86 @@
+#include <iostream>
+#include <vector>
+#include <climits>
+#include<string>
+#include<cmath> 
+#include<map>
+#include<set>
+#include<algorithm>
+#include <cctype>
+#define optimize ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+typedef long long ll;
+#define endl "\n"
+using namespace std;
+
+double check( double x ){
+    return (x * x * x) + x - 1;
+}
+
+double bisection( double a, double b ){
+    if( check(a) * check(b) >= 0 ){
+        cout << " Wrong value of a and b !!!" << endl;
+        return -1;
+    }
+    else{
+        int cnt = 0, n=0;
+        double c = 0, temp = 0;
+        //1st done
+        c = ( a + b ) / 2.0;
+        
+        if ( check( c ) < 0 ){
+                b = c;
+                }
+                
+            else{
+                a = c;
+                }
+                temp = c;
+                
+        //2nd time
+        c = ( a + b ) / 2.0;
+        
+        if ( check( c ) < 0 ){
+                b = c;
+                }
+                
+            else{
+                a = c;
+                }
+                
+        while ( abs(c - temp) >= 0.0001 ){
+           temp = c;
+            c = ( a + b ) / 2;
+            if ( c == 0.0 ){
+                break;
+            }
+            if ( check( c ) < 0 ){
+                b = c;
+                }
+                
+            else{
+                a = c;
+                }
+            
+           n++;
+        }
+        
+        cout << temp << endl;
+        return c;
+    }
+}
+
+int main() {
+    optimize;
+   double a, b;
+   cin >> a >> b;
+   double res = bisection(a, b);
+   
+   if ( res == -1 ){
+       cout << "the choosen a,b is wrong. " << endl;
+   }
+   
+   else{
+       cout << "Required root = " << res <<  endl;
+   }
+
+}
