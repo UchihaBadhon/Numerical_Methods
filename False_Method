@@ -1,0 +1,97 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define optimize ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define endl "\n"
+
+double funct( double x )
+{
+    return ( x * x * x ) + ( x * x ) -1;
+}
+
+double falsi( double a, double b )
+{
+    if( funct(a) * funct(b) >= 0 )
+    {
+        cout << "Wrong intervals! " << endl;
+        return false;
+    }
+    
+    double c, previous, val;
+    
+    //1st time
+    val = ( a * funct(b) ) - ( b * funct(a) );
+    c = val / ( funct(b) - funct(a) );
+    
+    if( funct(c) < 0 ){
+        b = c;
+    }
+    
+    else{
+        a = c;
+    }
+    
+    previous = c;
+    
+    //2nd time
+    val = ( a * funct(b) ) - ( b * funct(a) );
+    c = val / ( funct(b) - funct(a) );
+    
+    if( funct(c) < 0 ){
+        b = c;
+    }
+    
+    else
+    {
+        a = c;
+    }
+    
+    while( abs(c - previous) >= 0.001 )
+    {
+        previous = c;
+        val = ( a * funct(b) ) - ( b * funct(a) );
+        c = val / ( funct(b) - funct(a) );
+        
+        if( funct(c) == 0.0 )
+        {
+            break;
+            
+        }
+        
+        if( funct(c) < 0 ){
+            b = c;
+            
+        }
+        
+        else
+        {
+            a = c;
+            
+        }
+        
+    }
+    
+    cout << "previous root = " << previous << endl;
+    return c;
+}
+
+int main() 
+{
+    cout << "Enter the intervals : ";
+    optimize;
+    double a, b;
+    
+    cin >> a >> b;
+    double root = falsi( a, b );
+    
+    if( !root )
+    {
+        cout << "No root because of wrong intervals" << endl;
+    }
+    
+    else{
+        cout << "Required rot = " << root << endl;
+    }
+    
+    return 0;
+    
+}
