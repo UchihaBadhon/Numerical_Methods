@@ -1,86 +1,101 @@
-#include <iostream>
-#include <vector>
-#include <climits>
-#include<string>
-#include<cmath> 
-#include<map>
-#include<set>
-#include<algorithm>
-#include <cctype>
-#define optimize ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
-typedef long long ll;
-#define endl "\n"
+#include <bits/stdc++.h>
 using namespace std;
+#define optimize ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define endl "\n"
 
-double check( double x ){
-    return (x * x * x) + x - 1;
+double check( double x )
+{
+    return ( x * x * x ) + x - 1;
 }
 
-double bisection( double a, double b ){
-    if( check(a) * check(b) >= 0 ){
+double bisection( double a, double b )
+{
+    if( check(a) * check(b) >= 0 )
+    {
         cout << " Wrong value of a and b !!!" << endl;
-        return -1;
+        return false;
     }
-    else{
-        int cnt = 0, n=0;
+    
+    else
+    {
+        
         double c = 0, temp = 0;
+        
         //1st done
         c = ( a + b ) / 2.0;
         
-        if ( check( c ) < 0 ){
+        if ( check( c ) < 0 )
+        {
                 b = c;
-                }
-                
-            else{
-                a = c;
-                }
-                temp = c;
+            
+        }
+        else
+        {
+            a = c;
+            
+        }
+        temp = c;
                 
         //2nd time
         c = ( a + b ) / 2.0;
         
-        if ( check( c ) < 0 ){
-                b = c;
-                }
+        if ( check( c ) < 0 )
+        {
+            b = c;
+            
+        }
+        else
+        {
+            a = c;
+            
+        }
                 
-            else{
-                a = c;
-                }
-                
-        while ( abs(c - temp) >= 0.0001 ){
-           temp = c;
+        while ( abs(c - temp) >= 0.0001 )
+        {
+            temp = c;
             c = ( a + b ) / 2;
-            if ( c == 0.0 ){
+            
+            if ( c == 0.0 )
+            {
                 break;
             }
-            if ( check( c ) < 0 ){
+            if ( check( c ) < 0 )
+            {
                 b = c;
-                }
                 
-            else{
+            }
+                
+            else
+            {
                 a = c;
-                }
+                
+            }
             
-           n++;
         }
         
-        cout << temp << endl;
+        cout << "Previous root = " << temp << endl;
         return c;
     }
 }
 
-int main() {
+int main() 
+{
+    cout << "Enter the intervals : ";
     optimize;
-   double a, b;
-   cin >> a >> b;
-   double res = bisection(a, b);
+    double a, b;
+    cin >> a >> b;
+    double res = bisection(a, b);
    
-   if ( res == -1 ){
+   if ( res == false ){
        cout << "the choosen a,b is wrong. " << endl;
    }
    
    else{
        cout << "Required root = " << res <<  endl;
    }
+   
+   return 0;
+   
+   //take interval a = 1 b = 0
 
 }
