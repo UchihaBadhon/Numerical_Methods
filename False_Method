@@ -89,7 +89,7 @@ int main()
     }
     
     else{
-        cout << "Required rot = " << root << endl;
+        cout << "Required root = " << root << endl;
     }
     
     return 0;
