@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define optimize ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define endl "\n"
+
+double funct( double x )
+{
+    return ( x * x * x) - ( 3 * x ) - 5;
+}
+
+double derivative( double x )
+{
+    return ( 3 * x * x ) - 3;
+}
+
+double newton( double a, double b )
+{
+    if ( (funct(a) * funct(b)) >= 0 )
+    {
+        cout << "Wrong a, b" << endl;
+        return false;
+    }
+    
+    double c, temp, h;
+    c = ( a + b ) / 2;
+    h = funct(c) / derivative(c);
+    temp = c;
+    c-= h;
+    
+    while( abs( c-temp) >= 0.001)
+    {
+        h = funct(c) / derivative(c);
+        temp = c;
+        c = c - h;
+    }
+    
+    cout << "previous root = " << temp << endl;
+    return c;
+    
+}
+
+int main() 
+{
+    cout << "Enter the intervals : ";
+    optimize;
+	double a, b;
+	cin >> a >> b;
+	double root = newton(a, b);
+	
+	if( root == false ){
+	    cout << "There is no root because of wrong interval" << endl;
+	}
+	
+	else{
+	    cout << "The required root = " << root << endl;
+	}
+	
+	return 0;
+
+}
